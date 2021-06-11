@@ -86,7 +86,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2021</div>
+                <div class="small text-center text-muted fst-italic">&copy; Thorin & Company <span id="copyright"></span></div>
             </div>
         </div>
     </div>
@@ -97,5 +97,8 @@
 	
 	<!-- Custom scripts for this template -->
 	<script src="{{ url_for('static', filename='js/clean-blog.min.js') }}"></script>
+    <script>
+        $("#copyright").text(new Date().getFullYear());
+    </script>
 </body>
 </html>
