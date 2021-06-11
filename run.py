@@ -2,13 +2,16 @@
 import os
 import json
 # Import Flask class
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # Create an instance of the Flask class and store it in a variable called app
-# The first argument of the Flask class, is the name of the application's module - our package:
+# The first argument of the Flask class,
+# is the name of the application's module - our package:
 # (__name__)
-# Since we're just using a single module, we can use __name__ which is a built-in Python variable
+# Since we're just using a single module,
+# we can use __name__ which is a built-in Python variable
 app = Flask(__name__)
+
 
 # app.route decorator (effectively, a decorator is a way of wrapping functions)
 @app.route("/")
@@ -35,8 +38,8 @@ def about_member(member_name):
     return render_template("member.html", member=member)
 
 
-@app.route("/contact")
-def contact():                                                                                                                                      
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
     return render_template("contact.html", page_title="Contact")
 
 
