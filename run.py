@@ -2,7 +2,9 @@
 import os
 import json
 # Import Flask class
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
+if os.path.exists("env.py"):
+    import env
 
 # Create an instance of the Flask class and store it in a variable called app
 # The first argument of the Flask class,
@@ -11,6 +13,7 @@ from flask import Flask, render_template, request
 # Since we're just using a single module,
 # we can use __name__ which is a built-in Python variable
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 # app.route decorator (effectively, a decorator is a way of wrapping functions)
@@ -40,6 +43,9 @@ def about_member(member_name):
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your message!".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
